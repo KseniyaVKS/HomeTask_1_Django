@@ -28,3 +28,23 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+def home_view(request):
+    template_name = 'calculator/home.html'
+    context = {'dishes': DATA.keys()}
+
+    return render(request, template_name, context)
+
+def index(request, dish):
+    servings = request.GET.get("servings", 1)
+
+    recipe = {}
+    for key, vol in DATA[dish].items():
+        recipe.update({key: vol * int(servings)})
+
+    template_name = 'calculator/index.html'
+
+    context = {
+      'recipe': recipe
+    }
+    return render(request, template_name, context)
