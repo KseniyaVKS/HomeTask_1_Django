@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 
 from phones.models import Phone
 
@@ -22,7 +22,7 @@ def show_catalog(request):
 
 def show_product(request, slug):
     template = 'product.html'
-    phone = get_object_or_404(Phone, slug=slug)
+    phone = Phone.objects.filter(slug=slug).first()
     context = {'phone': phone}
 
     return render(request, template, context)
