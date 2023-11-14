@@ -20,6 +20,8 @@ class ArticleScopeInlineFormset(forms.BaseInlineFormSet):
             # таким образом объект не будет сохранен,
             # а пользователю выведется соответствующее сообщение об ошибке
                 raise ValidationError('Укажите главный раздел')
+            elif count > 1:
+                raise ValidationError('Основным может быть только один раздел')
         return super().clean()  # вызываем базовый код переопределяемого метода
 
 class ArticleScopeInline(admin.TabularInline):
